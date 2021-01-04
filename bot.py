@@ -19,9 +19,10 @@ async def ping(ctx):
 
 @bot.command()
 async def 幸運指數(ctx):
-    await ctx.send(F'{random.random(1,100)} ('%')')
+    lucky = random.randint(1,100)
+    await ctx.send(F':star2::four_leaf_clover:你今天的幸運指數:four_leaf_clover::star2:\n你的幸運指數為: {lucky} %!')
 
-
+'''
 @bot.event
 async def on_member_join(member):
     channel = bot.git_channel(int(jdata['Welcome_channel']))
@@ -31,7 +32,7 @@ async def on_member_join(member):
 async def on_member_remove(member):
     channel = bot.git_channel(int(jdata['Leave_channel']))
     await channel.send(F'{member} leave!')
-
+'''
 
 bot.run(jdata['TOKEN'])
 
