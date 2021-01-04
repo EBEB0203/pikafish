@@ -16,6 +16,8 @@ async def ping(ctx):
 @bot.command()
 async def 幸運指數(ctx):
     await ctx.send(F'{random.random(1,100)} ('%')')
+
+
 '''
 @bot.event
 async def on_member_join(member):
@@ -28,6 +30,6 @@ async def on_member_remove(member):
     await channel.send(F'{member} leave!')
 '''
 
-bot.run("Nzk1NTk4NTY5MDE2MDAwNTUy.X_Ls6A.msRxmrQO9PNuyDxGGJN72RCRNgE")
+bot.run("Nzk1NTk4NTY5MDE2MDAwNTUy.X_Ls6A.3bz7KI80ae6jSHOCz2mYJnRHMHs")
 
 
