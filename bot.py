@@ -20,7 +20,15 @@ async def ping(ctx):
 @bot.command()
 async def 幸運指數(ctx):
     lucky = random.randint(1,100)
-    await ctx.send(F':star2::four_leaf_clover:你今天的幸運指數:four_leaf_clover::star2:\n你的幸運指數為: {lucky} %!')
+    await ctx.send(F'>>> :star2::four_leaf_clover:你今天的幸運指數:four_leaf_clover::star2:\n你的幸運指數為: {lucky} %!')
+
+@bot.command()
+async def 摸魚燒(ctx):
+    await ctx.send(jdata['fish_burn'])
+
+
+
+
 
 '''
 @bot.event
