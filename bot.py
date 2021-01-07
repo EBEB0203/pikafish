@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import random
 import json
+import os
 
 #呼叫Json
 with open('setting.json', 'r', encoding='utf8') as jfile:
@@ -13,35 +14,38 @@ bot = commands.Bot(command_prefix = ">")
 async def on_ready():
     print(">> Bot is online <<")
 
-@bot.command()
-async def ping(ctx):
-    await ctx.send(F'{round(bot.latency*1000)} (ms)')
-
-@bot.command()
-async def 幸運指數(ctx):
-    lucky = random.randint(1,100)
-    await ctx.send(F'>>> :star2::four_leaf_clover:你今天的幸運指數:four_leaf_clover::star2:\n你的幸運指數為: {lucky} %!')
-
-@bot.command()
-async def 摸魚燒(ctx):
-    await ctx.send(jdata['fish_burn'])
-
-
-
-
-
-'''
 @bot.event
 async def on_member_join(member):
     channel = bot.git_channel(int(jdata['Welcome_channel']))
-    await channel.send(F'{member} join!')
+    await channel.send(f'{member} join!')
 
 @bot.event
 async def on_member_remove(member):
     channel = bot.git_channel(int(jdata['Leave_channel']))
-    await channel.send(F'{member} leave!')
-'''
+    await channel.send(f'{member} leave!')
 
-bot.run(jdata['TOKEN'])
+@bot.command()
+async def load(ctx, extension):
+    bot.load_extension(f'cmds.{extension}')    
+    await ctx.send(f'Loaded{extension} done.')
+
+@bot.command()
+async def unload(ctx, extension):
+    bot.unload_extension(f'cmds.{extension}')    
+    await ctx.send(f'Un - Loaded{extension} done.')
+
+@bot.command()
+async def reload(ctx, extension):
+    bot.reload_extension(f'cmds.{extension}')    
+    await ctx.send(f'Re - Loaded{extension} done.')
+
+for filename in os.listdir('./cmds'):
+   if filename.endswith('.py'):
+       bot.load_extension(f'cmds.{filename[:-3]}')
+
+if __name__ == "__main__":
+    bot.run(jdata['TOKEN'])
+
+
 
 
