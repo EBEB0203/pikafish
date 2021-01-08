@@ -4,7 +4,6 @@ import json
 import random
 import os
 
-#呼叫Json
 with open('setting.json', 'r', encoding='utf8') as jfile:
     jdata = json.load(jfile)
 
