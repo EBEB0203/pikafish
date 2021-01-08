@@ -4,18 +4,31 @@ from core.classes import Cog_Extension
 import random
 import json
 
+from datetime import datetime,timezone,timedelta
+dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
+dt2 = dt1.astimezone(timezone(timedelta(hours=8))) # 轉換時區 -> 東八區
+
 with open('setting.json', 'r', encoding='utf8') as jfile:
     jdata = json.load(jfile)
 
 class React(Cog_Extension):
+    
     @commands.command()
     async def 幸運指數(self, ctx):
-       lucky = random.randint(1,100)
-       await ctx.send(F'>>> :star2::four_leaf_clover:你今天的幸運指數:four_leaf_clover::star2:\n你的幸運指數為: {lucky} %!')
+        lucky = random.randint(1,100)
+        username = ctx.author.name
+        embed=discord.Embed(title=f":star2::four_leaf_clover:{username}今天的幸運指數:four_leaf_clover::star2:",
+         description=f"{username}, 你今天的幸運指數為: {lucky} % !", color=0xd5c034)
+        embed.set_footer(text=f"{username}輸入指令",icon_url=ctx.author.avatar_url)
+        await ctx.send(embed=embed)
+ 
 
     @commands.command()
-    async def 摸魚燒(self, ctx):
-       await ctx.send(jdata['fish_burn'])
+    async def 摸魚燒(self, ctx): 
+        embed=discord.Embed(title="摸魚燒",
+         description=jdata['fish_burn'], color=0xd5c034, timestamp = dt2)
+        embed.set_thumbnail(url="https://i.imgur.com/HbMxwtQ.jpg")
+        await ctx.send(embed=embed)
 
     @commands.command()
     async def 撿到(self, ctx):
@@ -38,7 +51,7 @@ class React(Cog_Extension):
        elif git == jdata['pic'][6]:
            await ctx.send('孔雀翎匣 !')
        elif git == jdata['pic'][7]:
-           await ctx.send('恒會 !')
+           await ctx.send('恒慧 !')
        elif git == jdata['pic'][8]:
            await ctx.send('韌守 !')
        elif git == jdata['pic'][9]:
