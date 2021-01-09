@@ -8,7 +8,7 @@ class Task(Cog_Extension):
         super().__init__(*args, **kwargs)
 
         self.count = 0
-        #間隔輸出
+        # 間隔輸出
         # async def interval():
         #     await self.bot.wait_until_ready()
         #     self.channel = self.bot.get_channel(797101234514690059)
@@ -18,22 +18,23 @@ class Task(Cog_Extension):
         
         # self.bg_task = self.bot.loop.create_task(interval())
 
-        async def time_task():
-            await self.bot.wait_until_ready()
-            self.channel = self.bot.get_channel(797101234514690059)
-            while not self.bot.is_closed():
-                now_time = datetime.datetime.now().strftime('%H%M')
-                with open('setting.json', 'r', encoding='utf8') as jfile:
-                    jdata = json.load(jfile)
-                if now_time == jdata['time'] and self.count == 0:
-                    await self.channel.send('Task Working!')
-                    self.count = 1
-                    await asyncio.sleep(1)
-                else:
-                    pass
-                    await asyncio.sleep(1)
+        # 指定時間輸出
+        # async def time_task():
+        #     await self.bot.wait_until_ready()
+        #     self.channel = self.bot.get_channel(797101234514690059)
+        #     while not self.bot.is_closed():
+        #         now_time = datetime.datetime.now().strftime('%H%M')
+        #         with open('setting.json', 'r', encoding='utf8') as jfile:
+        #             jdata = json.load(jfile)
+        #         if now_time == jdata['time'] and self.count == 0:
+        #             await self.channel.send('Task Working!')
+        #             self.count = 1
+        #             await asyncio.sleep(1)
+        #         else:
+        #             pass
+        #             await asyncio.sleep(1)
 
-        self.bg_task = self.bot.loop.create_task(time_task())
+        # self.bg_task = self.bot.loop.create_task(time_task())
         
     @commands.command()
     async def set_channel(self, ctx, ch: int):
