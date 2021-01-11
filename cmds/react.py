@@ -61,6 +61,20 @@ class React(Cog_Extension):
            await ctx.send('會命 !')
        elif git == jdata['pic'][11]:
            await ctx.send('賦力 !') 
+  
+    @commands.command()
+    async def 吃啥(self, ctx):
+        git = random.choice(jdata['night_eat'])
+        await ctx.send(git)
 
+    @commands.command()
+    async def 大州府(self, ctx):
+        big_week = random.choice(jdata['big_week'])
+        await ctx.send(f'大州府會出現在: {big_week} !!!')
+    
+    @commands.command()
+    async def 登記(self, ctx):
+        await ctx.send(f">>> [靠賽登記表]\n{jdata['check_in']}")
+        
 def setup(bot):
     bot.add_cog(React(bot))

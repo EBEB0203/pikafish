@@ -18,23 +18,22 @@ class Task(Cog_Extension):
         
         # self.bg_task = self.bot.loop.create_task(interval())
 
-        # 指定時間輸出
-        # async def time_task():
-        #     await self.bot.wait_until_ready()
-        #     self.channel = self.bot.get_channel(797101234514690059)
-        #     while not self.bot.is_closed():
-        #         now_time = datetime.datetime.now().strftime('%H%M')
-        #         with open('setting.json', 'r', encoding='utf8') as jfile:
-        #             jdata = json.load(jfile)
-        #         if now_time == jdata['time'] and self.count == 0:
-        #             await self.channel.send('Task Working!')
-        #             self.count = 1
-        #             await asyncio.sleep(1)
-        #         else:
-        #             pass
-        #             await asyncio.sleep(1)
+        async def time_task():
+            await self.bot.wait_until_ready()
+            self.channel = self.bot.get_channel(764743554471559201)
+            while not self.bot.is_closed():
+                now_time = datetime.datetime.now().strftime('%H%M')
+                with open('setting.json', 'r', encoding='utf8') as jfile:
+                    jdata = json.load(jfile)
+                if now_time == jdata['time'] and self.count == 0:
+                    await self.channel.send('3倍車2分鐘後出發 \噗噗/~~ !')
+                    self.count = 1
+                    await asyncio.sleep(1)
+                else:
+                    pass
+                    await asyncio.sleep(1)
 
-        # self.bg_task = self.bot.loop.create_task(time_task())
+        self.bg_task = self.bot.loop.create_task(time_task())
         
     @commands.command()
     async def set_channel(self, ctx, ch: int):
@@ -49,6 +48,7 @@ class Task(Cog_Extension):
         jdata['time'] = time
         with open('setting.json', 'w', encoding='utf8') as jfile:
             json.dump(jdata, jfile, indent=4)
+        await ctx.send(f'將於{time[:-2]}時{time[2:]}分提醒發車 !')
 
 def setup(bot):
     bot.add_cog(Task(bot))

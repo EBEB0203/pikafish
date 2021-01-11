@@ -10,3 +10,7 @@ Discord Developer
 >https://discord.com/developers/applications
 皮卡魚連結
 >https://discord.com/api/oauth2/authorize?client_id=795598569016000552&permissions=0&scope=bot
+
+.status = 狀態 #EX:online 
+ctx.author.avatar_url = icon 的URL
+ctx.author.name = 使用者名稱
