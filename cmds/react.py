@@ -4,6 +4,7 @@ from core.classes import Cog_Extension
 import random
 import json
 from datetime import datetime,timezone,timedelta
+import string
 
 with open('setting.json', 'r', encoding='utf8') as jfile:
     jdata = json.load(jfile)
@@ -75,6 +76,34 @@ class React(Cog_Extension):
     @commands.command()
     async def 登記(self, ctx):
         await ctx.send(f">>> [靠賽登記表]\n{jdata['check_in']}")
+
+    @commands.command()
+    async def 偷偷摸摸(self, ctx):
+       git = random.choice(jdata['taotaomomo'])
+       pic = discord.File(git)
+       await ctx.send(file= pic)
+    
+    @commands.command()
+    async def 瘋狂青蛙(self, ctx):
+        await ctx.send("https://media1.tenor.com/images/ff89fd2a106b1f9df9e229a6aae6c01d/tenor.gif?itemid=13598448")
         
+    @commands.command()
+    async def 測奶(self, ctx):
+        dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
+        dt2 = dt1.astimezone(timezone(timedelta(hours=8)))    
+        lucky = random.randint(1,100)
+        username = ctx.author.name
+        size = [random.choice(string.ascii_uppercase)+"奶",
+        random.choice(string.ascii_uppercase)+"奶",
+        random.choice(string.ascii_uppercase)+"奶",
+        "貧乳", "大奶", "大小奶"]
+        embed=discord.Embed(title=":cow2: :milk:測奶 :milk: :cow2:  ",
+         description=f"{username}, 你是{random.choice(size)} !", color=0xe66605,
+         timestamp = dt2)
+        embed.set_thumbnail(url="https://i.imgur.com/Mv0BNWp.jpg")
+        embed.set_footer(text=f"{username}輸入指令",icon_url=ctx.author.avatar_url)
+        await ctx.send(embed=embed)
+
+
 def setup(bot):
     bot.add_cog(React(bot))

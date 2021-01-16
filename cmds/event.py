@@ -25,6 +25,14 @@ class Event(Cog_Extension):
         
         if msg.content in keyname  and msg.author != self.bot.user:
             await msg.channel.send(random.choice(jdata['keyv']))
-
+    
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error):
+        if isinstance(error, commands.errors.CommandNotFound):
+            await ctx.send("不要亂打指令好ㄇ !")
+        if isinstance(error, commands.errors.MissingRequiredArgument):
+            await ctx.send("參數要填 懂 ??")
+        else:
+            await ctx.send("你打錯了! 大錯特錯!!!")
 def setup(bot):
     bot.add_cog(Event(bot))
