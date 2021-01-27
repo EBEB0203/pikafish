@@ -36,20 +36,20 @@ class Main(Cog_Extension):
     #     await ctx.channel.purge(limit = num+1)
     
     
-    # @commands.command()
-    # async def em(self, ctx):
-    #     dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
-    #     dt2 = dt1.astimezone(timezone(timedelta(hours=8)))
-    #     embed=discord.Embed(title="標題", url="https://www.facebook.com/OhR0203/",
-    #      description="內容", color=0xd5c034,
-    #      timestamp = dt2)
-    #     embed.set_author(name="EB", url="https://www.facebook.com/OhR0203/")
-    #     embed.add_field(name="1", value="11", inline=False)
-    #     embed.add_field(name="2", value="22", inline=False)
-    #     embed.add_field(name="3", value="33", inline=False)
-    #     embed.add_field(name="4", value="44", inline=False)
-    #     embed.set_footer(text="1234")
-    #     await ctx.send(embed=embed)
+    @commands.command()
+    async def test(self, ctx):
+        dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
+        dt2 = dt1.astimezone(timezone(timedelta(hours=8)))
+        embed=discord.Embed(title="標題", url="https://www.facebook.com/OhR0203/",
+         description="內容", color=0xd5c034,
+         timestamp = dt2)
+        embed.set_author(name="EB", url="https://www.facebook.com/OhR0203/")
+        embed.add_field(name="1", value="11", inline=False)
+        embed.add_field(name="2", value="22", inline=False)
+        embed.add_field(name="3", value="33", inline=False)
+        embed.add_field(name="4", value="44", inline=False)
+        embed.set_footer(text="1234")
+        await ctx.send(embed=embed)
     
 def setup(bot):
     bot.add_cog(Main(bot))
